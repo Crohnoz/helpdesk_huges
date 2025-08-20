@@ -1,0 +1,56 @@
+/* src/index.css — Tailwind base + opinionated tweaks */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -------- Base resets & typography -------- */
+@layer base {
+    html, body, #root { height: 100%; }
+    html { scroll-behavior: smooth; }
+    body {
+    @apply bg-neutral-50 text-neutral-800 antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    }
+    ::selection { background: #111; color: #fff; }
+    a { @apply text-neutral-900 underline-offset-2 hover:underline; }
+}
+
+/* -------- Focus styles (accessible, consistent) -------- */
+@layer utilities {
+    .focus-ring { @apply outline-none ring-2 ring-black ring-offset-2 ring-offset-white; }
+    .focus-ring-soft { @apply outline-none ring-2 ring-neutral-300 ring-offset-2; }
+}
+
+/* Apply focus rings to interactive elements by default */
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+    @apply focus-ring;
+}
+
+/* -------- Cards & surfaces (reusable) -------- */
+@layer components {
+    .hh-card { @apply bg-white border border-neutral-200 rounded-2xl shadow-soft; }
+    .hh-chip { @apply text-xs px-2 py-0.5 rounded-full bg-neutral-100 border border-neutral-200; }
+}
+
+/* -------- Reduced motion respect -------- */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}
+
+/* -------- Scrollbar (webkit) -------- */
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: #cfcfcf; border-radius: 8px; border: 2px solid transparent; background-clip: padding-box; }
+*::-webkit-scrollbar-thumb:hover { background: #bdbdbd; }
+
+/* -------- Buttons normalise -------- */
+button { -webkit-tap-highlight-color: transparent; }
+input, textarea, select { @apply bg-neutral-50; }
+input::placeholder, textarea::placeholder { @apply text-neutral-400; }

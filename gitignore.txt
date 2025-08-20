@@ -1,0 +1,25 @@
+# (opcional recomendado) normaliza saltos de línea en Windows
+git config core.autocrlf true
+
+# 1) Ignora carpetas y archivos que no deben ir al repo
+cat > .gitignore << 'EOF'
+node_modules/
+dist/
+.vite/
+*.log
+npm-debug.log*
+.env
+.env.*
+.DS_Store
+Thumbs.db
+.vscode/
+EOF
+
+# 2) Prepara y hace el primer commit
+git add .
+git commit -m "init: Hughes Helper front-end (React + Vite + Tailwind)"
+
+# 3) Conecta el remoto (tu repo en GitHub) y sube
+git remote add origin https://github.com/Crohnoz/helpdesk_huges.git
+git remote -v
+git push -u origin main
